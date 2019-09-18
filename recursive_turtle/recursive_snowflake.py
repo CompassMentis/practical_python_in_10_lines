@@ -8,5 +8,10 @@ def line(length):
         line(length / 3)
         turtle.left(angle)
 
-line(810)
+turtle.begin_fill()
+turtle.color('firebrick3', 'wheat')
+for _ in range(3):
+    line(90)
+    turtle.right(120)
+turtle.end_fill()
 turtle.done()

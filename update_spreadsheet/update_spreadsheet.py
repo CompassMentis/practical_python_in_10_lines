@@ -1,6 +1,10 @@
-import pandas
-new_data = pandas.read_json('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo')
-try:
-    old_data = pandas.read_excel('market.xls')
-except FileNotFoundError:
-    old_data = pandas.DataFrame()
+import openpyxl
+import os
+for name in os.listdir('source_files'):
+    workbook = openpyxl.load_workbook(filename='source_files/' + name)
+    sheet = workbook['Sheet1']
+    sheet['C1'].value = 'Next age'
+    for row in range(2, 100):
+        if sheet[f'B{row}'].value:
+            sheet[f'C{row}'].value = sheet[f'B{row}'].value + 1
+    workbook.save(filename='target_files/' + name)
